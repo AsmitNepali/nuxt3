@@ -10,5 +10,10 @@ export default defineNuxtConfig({
     config: {},
     injectPosition: 'first',
     viewer: true
+  },
+  runtimeConfig: {
+    public: {
+      baseURL: '' // Exposed to the frontend as well.
+    }
   }
 })

@@ -1,7 +1,8 @@
 export default defineNuxtPlugin((nuxtApp) => {
+  const config = useRuntimeConfig()
   return {
     provide: {
-      apiFetch: $fetch.create({ baseURL: 'http://nuxt-api.test' })
+      apiFetch: $fetch.create({ baseURL: config.public.baseURL })
     }
   }
 })

@@ -1,6 +1,6 @@
 <script setup>
 const route = useRoute()
-const { data: post } = await useFetch(`http://nuxt-api.test/api/posts/${route.params.id}`)
+const post = await useNuxtApp().$apiFetch(`http://nuxt-api.test/api/posts/${route.params.id}`)
 </script>
 
 <template>
