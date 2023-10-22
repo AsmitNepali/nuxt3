@@ -15,8 +15,11 @@ useHead({
         <div>
           <ul class="flex space-x-12">
             <li><nuxt-link to="/">Home</nuxt-link></li>
+            <li><nuxt-link to="/login">login</nuxt-link></li>
+            <li><nuxt-link to="/my-info">My Info</nuxt-link></li>
             <li><nuxt-link to="/about">About</nuxt-link></li>
             <li><nuxt-link to="/contact">Contact</nuxt-link></li>
+            <li><nuxt-link to="/create">create</nuxt-link></li>
           </ul>
         </div>
       </div>

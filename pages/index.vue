@@ -3,7 +3,7 @@ useHead({
   title: 'Home'
 })
 
-const posts = await useNuxtApp().$apiFetch('/api/posts')
+const posts = await useNuxtApp().$apiFetch('http://nuxt-api.test/api/posts')
 </script>
 <template>
   <div class="container mx-auto w-1/2 divide-y-2 divide-gray-300 py-8">
