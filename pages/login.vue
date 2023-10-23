@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { cs } from 'date-fns/locale'
 // import { useFetch } from '#app'
 import Cookies from 'js-cookie'
@@ -11,18 +11,22 @@ const errors = ref([])
 const { $apiFetch, $axios } = useNuxtApp()
 
 function csrf() {
-  return useFetch('http://localhost:8000/sanctum/csrf-cookie', { credentials: 'include' })
+  return $apiFetch('/backend/sanctum/csrf-cookie')
 }
 async function login() {
-  await csrf()
-  await useFetch('http://localhost:8000/login', {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'X-XSRF-TOKEN': useCookie('XSRF-TOKEN')
-    },
-    credentials: 'include'
-  })
+  try {
+    await csrf()
+    await $apiFetch('backend/login', {
+      method: 'POST',
+      body: {
+        email: email.value,
+        password: password.value
+      }
+    })
+    window.location.pathname = '/my-info'
+  } catch (err) {
+    errors.value = Object.values(err.data.errors).flat()
+  }
 }
 </script>
 

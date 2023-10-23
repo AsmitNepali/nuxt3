@@ -1,7 +1,20 @@
-<script setup lang="ts">
+<script setup>
 useHead({
   titleTemplate: '%s - Nuxt3 Blog'
 })
+
+const { $apiFetch } = useNuxtApp()
+async function logout() {
+  try {
+    await $apiFetch('/backend/logout', {
+      method: 'POST'
+    })
+  } catch (err) {
+    console.log(err.data)
+  } finally {
+    window.location.pathname = '/'
+  }
+}
 </script>
 
 <template>
@@ -20,6 +33,8 @@ useHead({
             <li><nuxt-link to="/about">About</nuxt-link></li>
             <li><nuxt-link to="/contact">Contact</nuxt-link></li>
             <li><nuxt-link to="/create">create</nuxt-link></li>
+            <li><nuxt-link to="/register">Register</nuxt-link></li>
+            <li><a href="#" @click.prevent="logout">Logout</a></li>
           </ul>
         </div>
       </div>

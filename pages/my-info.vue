@@ -2,6 +2,12 @@
 const title = useState('title')
 const user = ref(null)
 const posts = ref([])
+const { $apiFetch } = useNuxtApp()
+onMounted(async () => {
+  user.value = await $apiFetch('backend/api/user')
+  posts.value = await $apiFetch('backend/api/user/posts')
+  // user.value = response
+})
 </script>
 
 <template>

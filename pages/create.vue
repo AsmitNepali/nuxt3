@@ -7,7 +7,7 @@ const router = useRouter()
 async function createPost() {
   isLoading.value = true
   try {
-    const post = await useNuxtApp().$apiFetch(`http://nuxt-api.test/api/posts`, {
+    const post = await useNuxtApp().$apiFetch(`backend/api/posts`, {
       method: 'POST',
       body: {
         title: title.value,
