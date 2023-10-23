@@ -6,9 +6,10 @@ export default defineNuxtPlugin((nuxtApp) => {
     provide: {
       axios: axios.create({
         baseURL: config.public.baseURL,
+        withCredentials: true,
         headers: {
           Accept: 'application/json',
-          'XS-XSRF-TOKEN': useCookie('XSRF-TOKEN').value
+          'X-XSRF-TOKEN': Cookies.get('XSRF-TOKEN')
         }
       })
     }

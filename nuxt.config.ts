@@ -20,12 +20,12 @@ export default defineNuxtConfig({
     public: {
       baseURL: '' // Exposed to the frontend as well.
     }
-  },
-  nitro: {
-    routeRules: {
-      '/backend/**': {
-        proxy: 'http://nuxt-api.test/**'
-      }
-    }
   }
+  // nitro: {
+  //   routeRules: {
+  //     '/backend/**': {
+  //       proxy: 'http://nuxt-api.test/**'
+  //     }
+  //   }
+  // }
 })
