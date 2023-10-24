@@ -1,4 +1,8 @@
 <script setup>
+definePageMeta({
+  middleware: ['guest']
+})
+
 const title = ref('')
 const body = ref('')
 const isLoading = ref(false)

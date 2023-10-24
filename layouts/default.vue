@@ -4,6 +4,9 @@ useHead({
 })
 
 const { $apiFetch } = useNuxtApp()
+const { removeUser } = useAuth()
+const { isLoggedIn } = useAuth()
+
 async function logout() {
   try {
     await $apiFetch('/backend/logout', {
@@ -12,6 +15,7 @@ async function logout() {
   } catch (err) {
     console.log(err.data)
   } finally {
+    removeUser()
     window.location.pathname = '/'
   }
 }
@@ -26,16 +30,32 @@ async function logout() {
           <nuxt-link to="/">Logo</nuxt-link>
         </div>
         <div>
-          <ul class="flex space-x-12">
-            <li><nuxt-link to="/">Home</nuxt-link></li>
-            <li><nuxt-link to="/login">login</nuxt-link></li>
-            <li><nuxt-link to="/my-info">My Info</nuxt-link></li>
-            <li><nuxt-link to="/about">About</nuxt-link></li>
-            <li><nuxt-link to="/contact">Contact</nuxt-link></li>
-            <li><nuxt-link to="/create">create</nuxt-link></li>
-            <li><nuxt-link to="/register">Register</nuxt-link></li>
-            <li><a href="#" @click.prevent="logout">Logout</a></li>
-          </ul>
+          <ClientOnly>
+            <ul class="flex space-x-12">
+              <li>
+                <nuxt-link to="/">Home</nuxt-link>
+              </li>
+              <li v-if="!isLoggedIn">
+                <nuxt-link to="/login">login</nuxt-link>
+              </li>
+              <li v-if="!isLoggedIn">
+                <nuxt-link to="/register">Register</nuxt-link>
+              </li>
+              <li v-if="isLoggedIn">
+                <nuxt-link to="/my-info">My Info</nuxt-link>
+              </li>
+              <li v-if="isLoggedIn">
+                <nuxt-link to="/create">create</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link to="/about">About</nuxt-link>
+              </li>
+              <li>
+                <nuxt-link to="/contact">Contact</nuxt-link>
+              </li>
+              <li v-if="isLoggedIn"><a href="#" @click.prevent="logout">Logout</a></li>
+            </ul>
+          </ClientOnly>
         </div>
       </div>
     </nav>

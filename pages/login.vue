@@ -3,7 +3,9 @@ import { cs } from 'date-fns/locale'
 // import { useFetch } from '#app'
 import Cookies from 'js-cookie'
 // import Cookies from 'js-cookie'
-
+definePageMeta({
+  middleware: ['guest']
+})
 const email = ref('')
 const password = ref('')
 const isLoading = ref('')
@@ -23,6 +25,11 @@ async function login() {
         password: password.value
       }
     })
+
+    const user = await $apiFetch('/backend/api/user')
+    const { setUser } = useAuth()
+    setUser(user.name)
+
     window.location.pathname = '/my-info'
   } catch (err) {
     errors.value = Object.values(err.data.errors).flat()
